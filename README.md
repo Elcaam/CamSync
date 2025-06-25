@@ -8,6 +8,7 @@ to sort of explore concepts in system design including file indexing, retrieval 
 - The last but not leas is to apply ranking logic to return the most relevant files/documents
 
 ## Current Status (This project is still in its early phases)
+
             Completed Tasks:
             -----------------
 - The front end (for now)
@@ -24,5 +25,6 @@ to sort of explore concepts in system design including file indexing, retrieval 
 - Backend: Python, C++,...
 - AI: maybe NLTK???
 - File index: maybe Elastic Search????
+- ETC
 
   
