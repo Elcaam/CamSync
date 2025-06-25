@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- This declares the document type and version of HTML used -->
+<html lang="en">
+<!-- Begins the HTML document and sets the language to English -->
+<head>
+  <meta charset="UTF-8">
+  <!-- Sets character encoding to UTF-8 for full character support -->
+
+  <title>AI File Repository</title>
+  <!-- Sets the browser tab title -->
+
+  <link rel="stylesheet" href="FileRetrieval.css">
+  <!-- Links to your external CSS file for overall styling -->
+
+  <style>
+    /* Inline style to hide the .container by default */
+    .container {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Page content begins -->
+
+  <!-- Navigation Bar -->
+  <nav class="navigationBar">
+    <!-- Main navigation link -->
+    <div class="nav-item"><a href="#">Home</a></div>
+
+    <!-- Dropdown for Features -->
+    <div class="dropdown nav-item">
+      <a href="#">Features</a>
+      <div class="dropdown-content">
+        <!-- When clicked, this will display the file repository section -->
+        <a href="#" id="showFileRepository">File Repository</a>
+      </div>
+    </div>
+
+    <!-- Additional navigation links -->
+    <div class="nav-item"><a href="#">Search</a></div>
+    <div class="nav-item"><a href="#">Help</a></div>
+  </nav>
+
+  <!-- Hidden container that holds both panels: Storage and Search -->
+  <div class="container" id="fileRepositoryContainer" style="display: none; flex-direction: row; gap: 20px;">
+    
+    <!-- File Storage Box -->
+    <div class="file-box storage-box">
+      <h2>File Storage</h2>
+      <!-- Upload input: allows selecting multiple files -->
+      <input type="file" id="fileUpload" multiple>
+      <!-- Button triggers JavaScript function to upload files -->
+      <button onclick="uploadFiles()">Upload to SSD</button>
+    </div>
+
+    <!-- File Search Box -->
+    <div class="file-box search-box">
+      <h2>File Search</h2>
+      <!-- Input box for search query -->
+      <input type="text" id="searchQuery" placeholder="Search documents...">
+      <!-- Button triggers JavaScript function to perform a search -->
+      <button onclick="search()">Search</button>
+      <!-- Area where search results will be displayed -->
+      <div id="results"></div>
+    </div>
+  </div>
+
+  <!-- Inline JavaScript to handle visibility of the File Repository section -->
+  <script>
+    // Wait for the entire page to load before running any DOM manipulation
+    window.onload = function () {
+      // Get the "File Repository" link from the Features dropdown
+      const fileRepoLink = document.getElementById("showFileRepository");
+
+      // Get the container element that holds the two panels
+      const fileRepoContainer = document.getElementById("fileRepositoryContainer");
+
+      // Set up a click event handler on the File Repository link
+      fileRepoLink.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevents the default anchor behavior
+
+        // Only proceed if the container exists
+        if (fileRepoContainer) {
+          // Show the container using flex layout
+          fileRepoContainer.style.display = "flex";
+
+          // Smoothly scroll the container into view
+          fileRepoContainer.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    };
+  </script>
+
+  <!-- Link to external JavaScript file for uploadFiles() and search() functions -->
+  <script src="FileRetrieval.js"></script>
+
+</body>
+</html>
