@@ -1,16 +1,16 @@
 /* ============================
-   Global Page Styling
+  Below i got the body styling
 ============================ */
 
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background-image: url('Forcamweb.gif');       /* Background image */
-  background-size: cover;                       /* Cover entire viewport */
+  background-image: url('Forcamweb.gif');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;                 /* Prevent image from scrolling */
+  background-attachment: fixed;
 }
 
 /* ============================
@@ -18,7 +18,7 @@ body {
 ============================ */
 
 .navigationBar {
-  background-color: rgba(0, 0, 139, 0.7);        /* Semi-transparent dark blue */
+  background-color: rgba(0, 0, 139, 0.7);
   height: 80px;
   display: flex;
   align-items: flex-start;
@@ -26,7 +26,7 @@ body {
   gap: 60px;
   padding-top: 18px;
   border-radius: 8px;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .navigationBar a {
@@ -45,11 +45,10 @@ body {
 }
 
 /* ============================
-   Dropdown Menu
+Dropdown Menu Styling
 ============================ */
 
 .dropdown {
-  display: inline-block;
   position: relative;
 }
 
@@ -59,10 +58,8 @@ body {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: transparent;
   padding-top: 4px;
   z-index: 999;
-  min-width: 120px;
   text-align: center;
 }
 
@@ -71,73 +68,120 @@ body {
 }
 
 .dropdown-content a {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  background-color: rgba(0, 0, 139, 0.9);
   color: white;
   font-weight: bold;
   text-decoration: none;
   padding: 6px 10px;
   display: block;
   white-space: nowrap;
+  border-radius: 4px;
 }
 
 .dropdown-content a:hover {
-  background-color: transparent;
-  color: white;
+  background-color: #003399;
 }
 
 /* ============================
-   Container Layout
+   For the Section Containers
+============================ */
+
+.active {
+  display: flex !important;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#homeSection .file-box {
+  background-color: rgba(255, 255, 255, 0.85); /* a litte bit of light with slight transparency */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+}
+
+
+/* ============================
+    File Repo Layout
 ============================ */
 
 .container {
   display: flex;
-  gap: 20px;
-  background: transparent;                         /* Let background image show through */
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: none;
-  max-width: 1000px;
-  margin: 0 auto;
-  align-items: flex-start;
 }
-
-/* ============================
-   File Box Styling (Shared)
-============================ */
 
 .file-box {
-  flex: 1;
+  flex: 1 1 45%;
+  min-width: 300px;
   padding: 20px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Unique Colors for Each Box */
+
 .storage-box {
-  background-color: #f0fdf4;  /* Soft green */
+  background-color: #f0fdf4;
 }
 
 .search-box {
-  background-color: #f3f4ff;  /* Soft blue-purple */
+  background-color: #f3f4ff;
 }
 
 /* ============================
-   Buttons
+    Search Results
+============================ */
+
+#results {
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px dashed #ccc;
+  background: #ffffffcc;
+  min-height: 200px;
+  border-radius: 6px;
+  overflow-y: auto;
+}
+
+.result-item {
+  background: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.result-item:hover {
+  transform: translateY(-2px);
+}
+
+.result-item h3 {
+  margin: 0 0 5px 0;
+  color: #2c3e50;
+}
+
+.result-item p {
+  margin: 0;
+  color: #555;
+  font-size: 14px;
+}
+
+/* ============================
+    Button Styling
 ============================ */
 
 button {
   background: #007bff;
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 16px;
   border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -145,37 +189,17 @@ button:hover {
 }
 
 /* ============================
-   Search Results Styling
+  Responsive Design
 ============================ */
 
-#results {
-  flex: 2;
-  margin-top: 0;
-  padding: 15px;
-  border: 1px dashed #ddd;
-  background: #fafafa;
-  min-height: 300px;
-}
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* ============================
-   Upload & Search Row Layout
-============================ */
-
-.upload-search-row {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  margin-top: 20px;
-  align-items: flex-start;
-}
-
-.upload-box,
-.search-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.upload-box button,
-.search-box button {
-  margin-top: 5px;
+  .file-box {
+    flex: 1 1 100%;
+    max-width: 600px;
+  }
 }

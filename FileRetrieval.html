@@ -1,99 +1,124 @@
 <!DOCTYPE html>
-<!-- This declares the document type and version of HTML used -->
 <html lang="en">
-<!-- Begins the HTML document and sets the language to English -->
 <head>
-  <meta charset="UTF-8">
-  <!-- Sets character encoding to UTF-8 for full character support -->
-
-  <title>AI File Repository</title>
-  <!-- Sets the browser tab title -->
-
-  <link rel="stylesheet" href="FileRetrieval.css">
-  <!-- Links to your external CSS file for overall styling -->
+  <meta charset="UTF-8" />
+  <title>AI File Retrieval System</title>
+  <!---
+  Names: Cam H
+  This is my personal oroject for a web-based, AI-enhanced file retrieval system i'm building really as practival exploration of 
+  system design concepts that combines smart searches and natural language understanding of structured data handling on a user friendly inteface.
+  -->
+  <!-- Below is the link to CSS that controll the overall layout and design -->
+  <link rel="stylesheet" href="FileRetrieval.css" />
 
   <style>
-    /* Inline style to hide the .container by default */
-    .container {
+    /* Then below,I'm manually toggling this in JavaScript between Home & repo */
+    #fileRepositoryContainer,
+    #homeSection {
       display: none;
+    }
+
+    /*  Home panel is active by default so the user lands on Welcome screen*/
+    #homeSection.active,
+    #fileRepositoryContainer.active {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
   </style>
 </head>
 
 <body>
-  <!-- Page content begins -->
-
-  <!-- Navigation Bar -->
+  <!-- This just the naigation bar -->
   <nav class="navigationBar">
-    <!-- Main navigation link -->
-    <div class="nav-item"><a href="#">Home</a></div>
+    <!-- homepage link -->
+    <div class="nav-item"><a href="#" id="navHome">Home</a></div>
 
-    <!-- Dropdown for Features -->
+    <!-- Now, below i got some dropdown going on for features -->
     <div class="dropdown nav-item">
       <a href="#">Features</a>
       <div class="dropdown-content">
-        <!-- When clicked, this will display the file repository section -->
         <a href="#" id="showFileRepository">File Repository</a>
       </div>
     </div>
 
-    <!-- Additional navigation links -->
+    <!-- This the placeholder navigation items -->
     <div class="nav-item"><a href="#">Search</a></div>
     <div class="nav-item"><a href="#">Help</a></div>
   </nav>
 
-  <!-- Hidden container that holds both panels: Storage and Search -->
-  <div class="container" id="fileRepositoryContainer" style="display: none; flex-direction: row; gap: 20px;">
-    
-    <!-- File Storage Box -->
+  <!-- Gotta a home setction down here -->
+  <div id="homeSection" class="active">
+    <section class="file-box" style="margin-top: 30px;">
+      <h1>Welcome to The File Retrieval System</h1>
+      <p>This is an enhanced file management tool that's designed to help you:</p>
+      <ul>
+        <li>Search for documents and files in general with keywords or natural language</li>
+        <li>Upload files to a simulated SSD-based storage system</li>
+        <li>Leverage AI to understand and rank search results</li>
+      </ul>
+           <p style="font-style:oblique;">
+            Additional features will probably be added to make some improvements.</p>
+
+      <p><strong>How to use this system? Easy:</strong></p>
+      <ol>
+        <li>Click <em>Features > File Repository</em> to upload and search files</li>
+        <li>Try keyword-based searches (e.g., file name)</li>
+        <li>Stay tuned for advanced features!</li>
+      </ol>
+
+      <p style="font-style: italic;">
+        Built by Cam • Sprint 1 in progress...Honestly, I'm a couple sprints behind but yeah...
+      </p>
+    </section>
+  </div>
+
+  <!-- And then here's the file repo section  -->
+  <div class="container" id="fileRepositoryContainer">
+    <!-- File Storage Panel box -->
     <div class="file-box storage-box">
       <h2>File Storage</h2>
-      <!-- Upload input: allows selecting multiple files -->
-      <input type="file" id="fileUpload" multiple>
-      <!-- Button triggers JavaScript function to upload files -->
+      <input type="file" id="fileUpload" multiple />
       <button onclick="uploadFiles()">Upload to SSD</button>
     </div>
 
-    <!-- File Search Box -->
+    <!-- File Search Panel box -->
     <div class="file-box search-box">
       <h2>File Search</h2>
-      <!-- Input box for search query -->
-      <input type="text" id="searchQuery" placeholder="Search documents...">
-      <!-- Button triggers JavaScript function to perform a search -->
+      <input type="text" id="searchQuery" placeholder="Search documents..." />
       <button onclick="search()">Search</button>
-      <!-- Area where search results will be displayed -->
       <div id="results"></div>
     </div>
   </div>
 
-  <!-- Inline JavaScript to handle visibility of the File Repository section -->
+  <!-- Logic for switching the view  -->
   <script>
-    // Wait for the entire page to load before running any DOM manipulation
     window.onload = function () {
-      // Get the "File Repository" link from the Features dropdown
+      const navHome = document.getElementById("navHome");
       const fileRepoLink = document.getElementById("showFileRepository");
 
-      // Get the container element that holds the two panels
       const fileRepoContainer = document.getElementById("fileRepositoryContainer");
+      const homeSection = document.getElementById("homeSection");
 
-      // Set up a click event handler on the File Repository link
-      fileRepoLink.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevents the default anchor behavior
+      // home link behavior
+      navHome.addEventListener("click", function (e) {
+        e.preventDefault();
+        homeSection.classList.add("active");
+        fileRepoContainer.classList.remove("active");
+        homeSection.scrollIntoView({ behavior: "smooth" });
+      });
 
-        // Only proceed if the container exists
-        if (fileRepoContainer) {
-          // Show the container using flex layout
-          fileRepoContainer.style.display = "flex";
-
-          // Smoothly scroll the container into view
-          fileRepoContainer.scrollIntoView({ behavior: "smooth" });
-        }
+      // File Repository link behavior
+      fileRepoLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        fileRepoContainer.classList.add("active");
+        homeSection.classList.remove("active");
+        fileRepoContainer.scrollIntoView({ behavior: "smooth" });
       });
     };
   </script>
 
-  <!-- Link to external JavaScript file for uploadFiles() and search() functions -->
+  <!-- Here's finna be the logic for uploadFiles() and search() -->
   <script src="FileRetrieval.js"></script>
-
 </body>
 </html>
