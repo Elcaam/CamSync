@@ -1,30 +1,32 @@
-## File Retrieval System
-This a personal project for a web-based, AI-enhanced file management developed 
-to sort of explore concepts in system design including file indexing, retrieval algorithms, user UI/UX patterns.
+## CamSync
+CamSync is a personal project for a browser based file management system that brings the familiarity of desktop
+into a web-driven experience. It mimics SSD file manager systems directly in browser allowing the user
+to upload and retrieve their files without relying on VM or external cloud services. So, the end goal is 
+to try and build a smart, secure, and a privatefile manager that can combine the feel of SSD storage but with 
+the fluidity of web app.
 
-## Goals:
-- The main goal is to build an intelligent search interface that mimics ssd-like file storage
-- The other main thing is to enable natural languages understanding and maybe voice based query
-- The last but not leas is to apply ranking logic to return the most relevant files/documents
+## Features
+- Upload File(s)
+- Instant search
+- File Download
+- Storage
 
-## Current Status (This project is still in its early phases)
+## How it works
+CamSync basically mimics the behavior of SSD storage at the application layer. 
+Uploaded files are written to a dedicated folder on the server's filesystem and indexed on demand.
+So, on each interaction, whether it's uploading, searching or whatnot, the app updates views and presents
+a real-time data without requiring external databases or cloud services.
 
-            Completed Tasks:
-            -----------------
-- The front end (for now)
-- Basic file repo layout: upload + search UI.
+I built UI using standard HTML, CSS, and JS; Flask handles backend logic and file routing. Search queries are
+handled on the server side and returned inro jinja templates to update UI accordingly.
 
-          Upcoming Tasks:
-         ------------------
-  - Backend integration
-  - keyword based file search
-  - AI/NLP query processing
+## Technology:
+Frontend: HTML, CSS, JS
+Backend: Python, Flask
+Templating: Jinja2
+Search Logic: Keyword matching against filenames
 
-  ## Tech stack
-- Front End: HTML, CSS, JS
-- Backend: Python, C++,...
-- AI: maybe NLTK???
-- File index: maybe Elastic Search????
-- ETC
+## Features in progress
+- File deletion
+- Live filtering while typing
 
-  
