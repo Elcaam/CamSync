@@ -5,13 +5,14 @@
   <title>AI File Retrieval System</title>
   <!---
   Names: Cam H
-  This is an ongoing personal project for a web-based, AI-enhanced file retrieval system i'm building really as practival exploration of 
-  system design concepts that combines smart searches and natural language understanding of structured data handling on a user friendly inteface.
+  This is an ongoing personal project for a web-based file management system. 
+  This system empowers users to upload files through a streamlined web interface, 
+  search for them quickly using keyword-based queries, and retrieve them on demand from a local repository. 
+  The end goal really for me is to try and build an AI-augmented file manager that runs in any browser.
   -->
+
   <!-- Below is the link to CSS that controll the overall layout and design -->
   <link rel="stylesheet" href="{{ url_for('static', filename='FileRetrieval.css') }}">
-  <script src="{{ url_for('static', filename='FileRetrieval.js') }}"></script>
-
   <style>
     /* Then below,I'm manually toggling this in JavaScript between Home & repo */
     #fileRepositoryContainer,
@@ -51,15 +52,15 @@
   <!-- Gotta a home setction down here -->
   <div id="homeSection" class="active">
     <section class="file-box" style="margin-top: 30px;">
-      <h1>Welcome to The File Retrieval System</h1>
-      <p>This is an enhanced file management tool that's designed to help you:</p>
+      <h1>Welcome to CamSync System</h1>
+      <p>This is an enhanced web based file management system that's designed to help you:</p>
       <ul>
         <li>Search for documents and files in general with keywords or natural language</li>
         <li>Upload files to a simulated SSD-based storage system</li>
         <li>Leverage AI to understand and rank search results</li>
       </ul>
-           <p style="font-style:oblique;">
-            Additional features will probably be added to make some improvements.</p>
+      <p style="font-style:oblique;">
+        Additional features will probably be added to make some improvements.</p>
 
       <p><strong>How to use this system? Easy:</strong></p>
       <ol>
@@ -79,17 +80,52 @@
     <!-- File Storage Panel box -->
     <div class="file-box storage-box">
       <h2>File Storage</h2>
-      <input type="file" id="fileUpload" multiple />
-      <button onclick="uploadFiles()">Upload to SSD</button>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" multiple />
+        <button type="submit">Upload to SSD</button>
+      </form>
     </div>
 
     <!-- File Search Panel box -->
-    <div class="file-box search-box">
-      <h2>File Search</h2>
-      <input type="text" id="searchQuery" placeholder="Search documents..." />
-      <button onclick="search()">Search</button>
-      <div id="results"></div>
-    </div>
+<div class="file-box search-box">
+  <h2>File Search</h2>
+  <form action="/search" method="POST">
+    <input type="text" name="query" id="searchQuery" placeholder="Search documents..." />
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Search Results Section -->
+  <div id="results">
+    <h3>Search Results</h3>
+    {% if results %}
+      <ul>
+        {% for file in results %}
+          <li>
+            {{ file }}
+            <a href="{{ url_for('download_file', filename=file) }}">Download</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      {% if request.method == 'POST' %}
+        <p>No matching files found.</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <!-- Uploaded Files List -->
+  <div class="uploaded-list-box">
+    <h3>Uploaded Files</h3>
+    <ul>
+      {% for filename in files %}
+        <li>{{ filename }}</li>
+      {% else %}
+        <li>No files uploaded yet.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
   </div>
 
   <!-- Logic for switching the view  -->
@@ -97,11 +133,9 @@
     window.onload = function () {
       const navHome = document.getElementById("navHome");
       const fileRepoLink = document.getElementById("showFileRepository");
-
       const fileRepoContainer = document.getElementById("fileRepositoryContainer");
       const homeSection = document.getElementById("homeSection");
 
-      // home link behavior
       navHome.addEventListener("click", function (e) {
         e.preventDefault();
         homeSection.classList.add("active");
@@ -109,7 +143,6 @@
         homeSection.scrollIntoView({ behavior: "smooth" });
       });
 
-      // File Repository link behavior
       fileRepoLink.addEventListener("click", function (e) {
         e.preventDefault();
         fileRepoContainer.classList.add("active");
@@ -119,7 +152,16 @@
     };
   </script>
 
-  <!-- Here's finna be the logic for uploadFiles() and search() -->
+  <!-- Toggle File Repository if search results exist -->
+  {% if results %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("fileRepositoryContainer").classList.add("active");
+      document.getElementById("homeSection").classList.remove("active");
+    });
+  </script>
+  {% endif %}
+
   <script src="FileRetrieval.js"></script>
 </body>
 </html>
