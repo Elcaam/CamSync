@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "name": "MinGW UCRT64",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:/msys64/ucrt64/include",  
+        "C:/msys64/ucrt64/include/c++/15.1.0"
+      ],
+      "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",  
+      "intelliSenseMode": "gcc-x64"
+    }
+  ],
+  "version": 4
+}
